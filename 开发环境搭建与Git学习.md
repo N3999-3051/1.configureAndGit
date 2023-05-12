@@ -1356,38 +1356,40 @@ git clone 用户名@IP地址:/文件路径 本地路径
 >3. ==git clone 仓库地址==  可以将远程仓库下载到本地
 >3. **本地仓库与GitHub远程仓库关联，增加对github上创建的仓库的管理**：
 >
-> ```shell
-> git remote add origin RepoName//RepoName为仓库的ssh地址
-> ```
+>```shell
+>git remote add origin RepoName//RepoName为仓库的ssh地址
+>```
 >
-> <img src="开发环境搭建与Git学习.assets/image-20230512105857961.png" alt="image-20230512105857961" style="zoom:67%;" /> 
+><img src="开发环境搭建与Git学习.assets/image-20230512105857961.png" alt="image-20230512105857961" style="zoom:67%;" /> 
 >
 >4. 在创建仓库时，如果默认生成了README文件，就已经算是本地提交一次了，此时需要先在本地拉取一下仓库，保持同步。
 >
-> ```shell
-> git pull 仓库ssh地址//拉取仓库保持同步
-> ```
+>```shell
+>git pull 仓库ssh地址//拉取仓库保持同步
+>```
 >
-> <img src="开发环境搭建与Git学习.assets/image-20230512110434222.png" alt="image-20230512110434222" style="zoom:67%;" /> 
+><img src="开发环境搭建与Git学习.assets/image-20230512110434222.png" alt="image-20230512110434222" style="zoom:67%;" /> 
 >
-> ```shell
+>```shell
 >方式2： 
 >在将本地仓库与GitHub网站上的仓库进行关联后，便可进行推送了，但是在第一次进行推送时，需要注意的是，GitHub网站上的仓库并非是空的，我们在创建时创建了一个README文档，因此需要将两者进行合并才行。
 >
-> git pull --rebase origin master//master是分支名
-> ```
+>git pull --rebase origin master//master是分支名
+>```
 >
 >
 >
 >5. 本地仓库文件提交到远程(GitHub)仓库。
 >
->  ```shell
+>   每次提交之前一定要记得拉取一下，然后再去提交。否则很容易导致冲突。
+>
+> ```shell
 >git add .//.表示提交所有文件，一般后面是直接跟文件名。此命令将本地更新提交到暂存区。
 >
 >git commit -m "提交信息说明"//信息说明公司都有自己的规则，一定要写的，可以让我们知道更新了什么
 >
 >git push -u origin master//这个带有-u这个参数是指，将master分支的所有内容都提交，第一次关联之后后边你再提交就可以不用这个参数了，之后你的每一次修改，你就可以只将你修改push就好了。
->  ```
+> ```
 >
 >==**GitHub上的mian分支就是master分支，所以在后面拉取和提交时都要注意不要写成了master分支，否则就会多创建一个分支出来**。==
 >
@@ -1400,6 +1402,8 @@ git clone 用户名@IP地址:/文件路径 本地路径
 **问题描述：** 代码写好了，提交时报如下错误，按照网上的方法pull远程仓库，然后还是没有提交成功。同时发现本地的文件更新的内容被覆盖。
 
 <img src="开发环境搭建与Git学习.assets/image-20221011101215100.png" alt="image-20221011101215100" style="zoom:67%;" /> 
+
+**问题原因：**远程仓库里文件的内容发生了更新，本地也做了更新，没有拉取最新的分支，直接提交就会冲突。
 
 **解决：** 只要自己有过commit，就会有commit记录，找到提交的记录然后恢复问题，
 
